@@ -8,25 +8,18 @@ import {
 } from "typeorm";
 
 import { User } from "../../users/entities/User";
-import { Genre } from "./Genre";
-import { Order } from "./Order";
+import { Game } from "./Game";
 
-@Entity("games")
-export class Game {
+@Entity("orders")
+export class Order {
   @PrimaryGeneratedColumn("uuid")
   id: string;
-
-  @Column()
-  title: string;
 
   @ManyToMany(() => User, (user) => user.games)
   users: User[];
 
-  @ManyToMany(() => Genre, (genre) => genre.games)
-  genres: Genre[];
-
-  @ManyToMany(() => Order, (order) => order.games)
-  orders: Order[];
+  @ManyToMany(() => Game, (game) => game.orders)
+  games: Game[];
 
   @CreateDateColumn()
   created_at: Date;
